@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EntityF_udemy.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -24,6 +26,11 @@ namespace EntityF_udemy
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var dbContextString = @"Server=(localdb)\mssqllocaldb;Database=EntityDB; Trusted_Connection=True;";
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(dbContextString));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
